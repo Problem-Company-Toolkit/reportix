@@ -1,0 +1,29 @@
+version: '3.8'
+
+networks:
+  reportix:
+    name: reportix
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # [Choice] Go version 1, 1.18, 1.17
+        # Append -bullseye or -buster to pin to an OS version.
+        # Use -bullseye variants on local arm64/Apple Silicon.
+        VARIANT: "1.20-bullseye"
+        # Options
+        NODE_VERSION: "18"
+    env_file:
+      # Ensure that the variables in .env match the same variables in devcontainer.json
+      - .env
+
+    volumes:
+      - ..:/workspace/reportix:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    networks:
+      - reportix
