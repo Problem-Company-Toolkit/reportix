@@ -19,7 +19,7 @@ go get github.com/problem-company-toolkit/reportix
 
 Here's a brief example of how you can use Reportix:
 
-```
+```go
 import (
     "context"
     "fmt"
